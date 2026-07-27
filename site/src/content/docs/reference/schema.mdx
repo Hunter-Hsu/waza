@@ -421,6 +421,7 @@ config:
 **Default:** (none)
 
 MCP (Model Context Protocol) server configurations for this evaluation. Each key is a server name, and the value is its configuration.
+When `tools` is omitted or null for a live stdio or HTTP/SSE server, Waza exposes all tools by sending an explicit `["*"]` allowlist to the Copilot SDK. Set `tools` to an explicit list, including `[]`, to restrict or disable exposed tools.
 
 ```yaml
 config:
@@ -428,7 +429,9 @@ config:
     filesystem:
       command: /path/to/server
       args: [--root, /data]
+      tools: ["*"]
     github:
+      type: http
       url: http://localhost:3000
 ```
 
